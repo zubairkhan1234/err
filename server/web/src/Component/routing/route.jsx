@@ -1,20 +1,9 @@
 import React from 'react';
-// import Login from '../Login/login'
-// import Signup from '../signup/signup'
-// import Dashboard from '../dashboard/dashboard'
-
-
-// import {
-//     BrowserRouter as Router,
-//     Switch,
-//     Route,
-//     Link
-// } from "react-router-dom";
 import {
     Link
+    
 } from "react-router-dom";
-
-import { useGlobalState, useGlobalStateUpdate } from "./context/globalContext"
+import { UseGlobalState, UseGlobalStateUpdate } from "../../context/context"
 
 
 function AppRoute() {
@@ -37,11 +26,12 @@ function AppRoute() {
     return (
         <>
             <div style={themeStyles}>
-                <Link to="/">Dashboard</Link>
+                <Link to="/dashboard">Dashboard</Link>
                 <Link to="/login">Login</Link>
                 <Link to="/signup">SignUp</Link>
-                <button style={navStyles} onClick={() => setGlobalState(prev => ({ ...prev, darkTheme: !prev.darkTheme }))} >toggle</button>
-                {"===>" + JSON.stringify(globalState)}
+                <Link to="/">Home</Link>
+                {/* <button style={navStyles} onClick={() => setGlobalState(prev => ({ ...prev, darkTheme: !prev.darkTheme }))} >toggle</button>
+                {"===>" + JSON.stringify(globalState)} */}
                 
             </div>
         </>
@@ -49,4 +39,4 @@ function AppRoute() {
 }
 
 
-export default AppRoute
+export default AppRoute;

@@ -4,13 +4,13 @@ import {UseGlobalState, UseGlobalStateUpdate} from '../../context/context'
 
 function Signup() {
 
+    const setGlobalState = UseGlobalStateUpdate()
+    const globalState = UseGlobalState();
 
 
     function signup(event) {
         event.preventDefault()
         
-        const globalState = UseGlobalState();
-        const setGlobalState = UseGlobalStateUpdate()
 
 
         var userName = document.getElementById('name').value
@@ -73,7 +73,7 @@ function Signup() {
                     <label>Password</label><br />
                     <input type="text" placeholder="Enter your password" id="password" /><br />
                     <button type="submit" onClick={ () => {
-                    setGlobalState(preval => ({ ...preval , darkTheme : !darkTheme }))
+                    // setGlobalState(preval => ({ ...preval , darkTheme : !darkTheme }))
                 }}></button>
                 </form>
 

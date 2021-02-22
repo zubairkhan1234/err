@@ -1,5 +1,4 @@
 import React from 'react';
-import AppRoute from '../routing/route'
 
 import {UseGlobalState, UseGlobalStateUpdate} from '../../context/context'
 
@@ -14,12 +13,11 @@ import {UseGlobalState, UseGlobalStateUpdate} from '../../context/context'
 
         return (
             <>
-                <AppRoute />
                 <h1>This is dashboard</h1>
                 
-                <button onClick={ () => {
+                {/* <button onClick={ () => {
                     setGlobalState(preval => ({ ...preval , darkTheme : !darkTheme }))
-                }}></button>
+                }}></button> */}
 
             </>
         )

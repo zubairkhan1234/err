@@ -1,27 +1,22 @@
-
 import React from 'react'
 import {UseGlobalState, UseGlobalStateUpdate} from '../../context/context'
 
-import {History} from 'react-dom'
+import {useHistory} from 'react-router-dom'
 
 
 function Login() {
 
     const golobalState = UseGlobalState()
     const globalStateUpdate = UseGlobalStateUpdate() 
-    const history = History()
+    const history = useHistory()
 
     function login(event) {
         event.preventDefault()
 
         var loginEmail = document.getElementById('Email').value
         var loginPassword = document.getElementById('Password').value
-    
-        // console.log(loginEmail, loginPassword)
-    
-    
+        
         const Http = new XMLHttpRequest();
-        // const url = "http://localhost:3000/login"
         Http.open("POST", "http://localhost:5000/login")
         Http.setRequestHeader("Content-Type", "application/json");
         Http.send(JSON.stringify({
@@ -38,25 +33,20 @@ function Login() {
                 // console.log(jsonResponse)
                 if (jsonResponse.status === 200) {
                     alert(jsonResponse.token);
+                    history.push('/dashboard')
                     console.log(jsonResponse.token)
                     localStorage.setItem("token", jsonResponse.token)
-                    history.push('/')
-
                     globalStateUpdate(preval => {
-                        return {...preval, loginStatus : jsonResponse.status, token: jsonResponse.token}
+                        return {...preval, loginStatus : true, token: jsonResponse.token}
                     })
-
                 } else {
                     alert(jsonResponse.message);
                 }
             }
         }
     
-        return false;
-    
+        return false;    
     }
-
-
 
     return (
         <>
@@ -68,7 +58,6 @@ function Login() {
                     <label>Password: </label><br />
                     <input type="text" placeholder="Enter your Email" id="Password" /><br />
                     <button>Login Now</button>
-                    {JSON.stringify(golobalState)}
                 </form>
             </div>
         </>
