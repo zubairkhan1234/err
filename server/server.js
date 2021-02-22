@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 5000;
 
 var app = express()
 app.use(cors({
-    origin: '*',
+    origin: 'http://localhost:3000',
     credentials: true
 }))
 app.use(morgan('dev'))

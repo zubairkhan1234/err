@@ -43,9 +43,7 @@ function Signup() {
     
         Http.onreadystatechange = (e) => {
             if (Http.readyState === 4) {
-    
                 const jsonResponse = JSON.parse(Http.responseText)
-    
                 if (jsonResponse.status === 200) {
                     alert(jsonResponse.message);
                     // console.log(jsonResponse.message);
@@ -62,7 +60,7 @@ function Signup() {
     return (
         <>
             <div>
-                <h1>Signup From</h1>
+                <h1>Signup Form</h1>
                 <form onSubmit={signup}>
                     <label>Name :</label><br />
                     <input type="text" placeholder="Enter your username" id="name" /><br />

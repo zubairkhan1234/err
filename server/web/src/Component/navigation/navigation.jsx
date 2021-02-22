@@ -27,14 +27,15 @@ function Navigation() {
                     <Route exact path="/">
                         <Home />
                     </Route>
-                    {globalState.loginStatus === true ?
-                        <Route exact path="/dashboard">
-                            <Dashboard />
-                        </Route>
-                        :
+                    {globalState.loginStatus === false ?
                         <Route path="/login">
                             <Login />
                         </Route>
+                        :
+                        <Route exact path="/dashboard">
+                            <Dashboard />
+                        </Route>
+                        
                     }
                     {/* <Route  path="/dashboard">
                         <Dashboard />

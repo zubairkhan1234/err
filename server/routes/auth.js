@@ -133,7 +133,6 @@ api.post("/login", (req, res, next) => {
 
                         res.status(200).send({
                             message: "login success",
-
                             loginRequestUser: {
                                 name: loginRequestUser.name,
                                 email: loginRequestUser.email,

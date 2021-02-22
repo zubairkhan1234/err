@@ -1,53 +1,41 @@
 import React from 'react'
 import {UseGlobalState, UseGlobalStateUpdate} from '../../context/context'
-
 import {useHistory} from 'react-router-dom'
-
-
+import axios from 'axios'
+ 
 function Login() {
-
+    let url = "http://localhost:5000"
     const golobalState = UseGlobalState()
     const globalStateUpdate = UseGlobalStateUpdate() 
     const history = useHistory()
 
     function login(event) {
-        event.preventDefault()
-
-        var loginEmail = document.getElementById('Email').value
-        var loginPassword = document.getElementById('Password').value
-        
-        const Http = new XMLHttpRequest();
-        Http.open("POST", "http://localhost:5000/login")
-        Http.setRequestHeader("Content-Type", "application/json");
-        Http.send(JSON.stringify({
-            email: loginEmail,
-            password: loginPassword
-        }));
-    
-    
-        Http.onreadystatechange = (e) => {
-            if (Http.readyState === 4) {
-    
-                // console.log(Http.responseText);
-                const jsonResponse = JSON.parse(Http.responseText)
-                // console.log(jsonResponse)
-                if (jsonResponse.status === 200) {
-                    alert(jsonResponse.token);
-                    history.push('/dashboard')
-                    console.log(jsonResponse.token)
-                    localStorage.setItem("token", jsonResponse.token)
-                    globalStateUpdate(preval => {
-                        return {...preval, loginStatus : true, token: jsonResponse.token}
-                    })
-                } else {
-                    alert(jsonResponse.message);
-                }
+        event.preventDefault();
+        axios({
+            method: 'post',
+            url: url + '/login',
+            data: {
+                email: document.getElementById('Email').value,
+                password: document.getElementById('Password').value
+            },
+            withCredentials: true
+        }).then((response) => {
+            if (response.status === 200) {
+                // alert(response.data.message)
+                console.log(response)
+                globalStateUpdate(prev =>({
+                    ...prev,
+                    loginStatus: true,
+                }))
+                history.push("/Dashboard");
             }
-        }
-    
-        return false;    
+            else {
+                history.push("/login");
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
     }
-
     return (
         <>
             <div>
