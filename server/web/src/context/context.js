@@ -29,16 +29,18 @@ function GlobalStateProvider({ children }) {
         })
             .then(function (response) {
                 // handle success
-                console.log("response: ", response.status);
+                // console.log("response: ", response.status);
                 if (response.status === 200) {
+                    console.log(response.data)
+
                     setData(prev => ({ ...prev, loginStatus: true, user: response.data.profile }))
                 }
             })
             .catch(function (error) {
                 // handle error
-                console.log("error: ==== ", error);
+                // console.log("error: ==== ", error);
                 if (error && error.response && error.response.status) {
-                    console.log("error ==============> ", error.response.status);
+                    // console.log("error ==============> ", error.response.status);
                     setData(prev => ({ ...prev, loginStatus: false }))
                 }
             })
@@ -48,6 +50,7 @@ function GlobalStateProvider({ children }) {
         }
     }, [])
 
+    console.log()
 
 
 

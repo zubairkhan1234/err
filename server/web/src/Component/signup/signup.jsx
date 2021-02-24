@@ -25,7 +25,7 @@ function Signup() {
             userPhone: userPhone,
             userPassword: userPassword
         }
-        console.log(userData)
+        // console.log(userData)
         document.getElementById("name").value = ""
         document.getElementById("email").value = ""
         document.getElementById("phone").value = ""
@@ -42,8 +42,7 @@ function Signup() {
                 history.push('/login')
             })
             .catch(function (error) {
-
-                alert(error.response.data.message)
+                console.log(error)
             });
     }
 

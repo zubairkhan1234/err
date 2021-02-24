@@ -8,7 +8,7 @@ function Dashboard() {
     const globalState = UseGlobalState();
     const setGlobalState = UseGlobalStateUpdate()
 
-    console.log("dlajdlfkjasd " , globalState)
+    console.log("dlajdlfkjasd " , globalState.user.profile)
    
 
 
@@ -16,7 +16,7 @@ function Dashboard() {
     return (
         <>
             <h1>This is dashboard</h1>
-
+            {globalState.user.name}
 
         </>
     )

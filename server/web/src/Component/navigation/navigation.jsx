@@ -16,7 +16,7 @@ import {
 function Navigation() {
 
     const globalState = UseGlobalState()
-    console.log(globalState)
+    // console.log(globalState)
     const globalStateUpdate = UseGlobalStateUpdate()
 
     return (
