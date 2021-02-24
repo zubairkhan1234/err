@@ -1,4 +1,4 @@
-import react from "react";
+import React from "react";
 import { UseGlobalState, UseGlobalStateUpdate } from '../../context/context'
 import { baseUrl } from '../../core/index'
 import axios from 'axios'

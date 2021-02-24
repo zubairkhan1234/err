@@ -21,33 +21,49 @@ function Navigation() {
 
     return (
         <>
-            <Router>
+            <div>
+                <Router>
+                    <AppRoute />
+                    {/* public routes */}
+                    {(globalState.loginStatus === false) ?
+                        <>
+                            <Route exact={true} path="/">
+                                <Login />
+                            </Route>
 
-                <AppRoute />
-                <Switch>
-                    <Route exact path="/">
-                        <Home />
-                    </Route>
-                    {globalState.loginStatus === true ?
-                        <Route path="/dashboard">
-                            <Dashboard />
-                        </Route>
-                        :
-                        <Redirect path="/login">
-                            <Login />
-                        </Redirect>
-                    }
-                    {/* <Route  path="/dashboard">
-                        <Dashboard />
-                    </Route> */}
-                    <Route path="/login">
-                        <Login />
-                    </Route>
-                    <Route path="/signup">
-                        <Signup />
-                    </Route>
-                </Switch>
-            </Router>
+                            <Route path="/signup">
+                                <Signup />
+                            </Route>
+                            {/* <Route path="/forget_password">
+                                <ForgetPassword />
+                            </Route> */}
+
+                            <Route path="*">
+                                <Redirect to="/" />
+                            </Route>
+                        </>
+                        : null}
+
+                    {/* private routes */}
+
+                    {(globalState.loginStatus === true) ?
+
+                        <>
+                            <Route exact path="/">
+                                <Home />
+                            </Route>
+
+                            <Route path="/dashboard">
+                                <Dashboard />
+                            </Route>
+
+                            <Route path="*">
+                                <Redirect to="/" />
+                            </Route>
+                        </>
+                        : null}
+                </Router >
+            </div>
         </>
     )
 }
