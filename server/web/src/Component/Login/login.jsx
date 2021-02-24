@@ -2,9 +2,9 @@ import React from 'react'
 import {UseGlobalState, UseGlobalStateUpdate} from '../../context/context'
 import {useHistory} from 'react-router-dom'
 import axios from 'axios'
- 
+import {baseUrl} from '../../core/index'
+
 function Login() {
-    let url = "http://localhost:5000"
     const golobalState = UseGlobalState()
     const globalStateUpdate = UseGlobalStateUpdate() 
     const history = useHistory()
@@ -13,7 +13,7 @@ function Login() {
         event.preventDefault();
         axios({
             method: 'post',
-            url: url + '/login',
+            url: baseUrl + '/login',
             data: {
                 email: document.getElementById('Email').value,
                 password: document.getElementById('Password').value
@@ -21,8 +21,8 @@ function Login() {
             withCredentials: true
         }).then((response) => {
             if (response.status === 200) {
-                // alert(response.data.message)
                 console.log(response)
+                alert(response.data.message)
                 globalStateUpdate(prev =>({
                     ...prev,
                     loginStatus: true,
@@ -33,7 +33,7 @@ function Login() {
                 history.push("/login");
             }
         }).catch((error) => {
-            console.log(error);
+            console.log(error.data.message);
         });
     }
     return (

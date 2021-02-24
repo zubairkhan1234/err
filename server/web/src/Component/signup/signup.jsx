@@ -1,60 +1,50 @@
 import react from "react";
-import {UseGlobalState, UseGlobalStateUpdate} from '../../context/context'
+import { UseGlobalState, UseGlobalStateUpdate } from '../../context/context'
+import { baseUrl } from '../../core/index'
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 
 function Signup() {
 
     const setGlobalState = UseGlobalStateUpdate()
     const globalState = UseGlobalState();
-
+    const history = useHistory()
 
     function signup(event) {
         event.preventDefault()
-        
-
 
         var userName = document.getElementById('name').value
         var userEmail = document.getElementById('email').value.toLowerCase()
         var userPhone = document.getElementById('phone').value
         var userPassword = document.getElementById('password').value
-    
-        // console.log(userEmail)
-    
+
         var userData = {
             userName: userName,
             userEmail: userEmail,
             userPhone: userPhone,
             userPassword: userPassword
         }
-        // console.log(userData)
-    
-    
+        console.log(userData)
         document.getElementById("name").value = ""
         document.getElementById("email").value = ""
         document.getElementById("phone").value = ""
         document.getElementById("password").value = ""
-    
-        const Http = new XMLHttpRequest();
-        // const url = "http://localhost:3000/signup";
-        Http.open("POST", "http://localhost:5000/signup");
-        Http.setRequestHeader("Content-Type", "application/json");
-    
-        Http.send(JSON.stringify(userData));
-    
-        Http.onreadystatechange = (e) => {
-            if (Http.readyState === 4) {
-                const jsonResponse = JSON.parse(Http.responseText)
-                if (jsonResponse.status === 200) {
-                    alert(jsonResponse.message);
-                    // console.log(jsonResponse.message);
-                    // window.location.href="login.html";
-                } else {
-                    // console.log(jsonResponse.message);
-                    alert(jsonResponse.message);
-                }
-            }
-        }
-        return false;
+
+        axios({
+            method: 'post',
+            url: baseUrl + '/signup',
+            data: userData,
+            withCredentials: true
+        })
+            .then(function (response) {
+                alert(response.data.message)
+                history.push('/login')
+            })
+            .catch(function (error) {
+
+                alert(error.response.data.message)
+            });
     }
 
     return (
@@ -70,9 +60,9 @@ function Signup() {
                     <input type="number" placeholder="Enter your phone number" id="phone" /><br />
                     <label>Password</label><br />
                     <input type="text" placeholder="Enter your password" id="password" /><br />
-                    <button type="submit" onClick={ () => {
-                    // setGlobalState(preval => ({ ...preval , darkTheme : !darkTheme }))
-                }}></button>
+                    <button type="submit" onClick={() => {
+                        // setGlobalState(preval => ({ ...preval , darkTheme : !darkTheme }))
+                    }}></button>
                 </form>
 
             </div>
@@ -83,4 +73,4 @@ function Signup() {
 
 }
 
-export default Signup ;
+export default Signup;

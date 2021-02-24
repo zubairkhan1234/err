@@ -32,12 +32,7 @@ api.post('/signup', (req, res, next) => {
         return
     };
 
-
-
     userModle.findOne({ email: req.body.userEmail }, function (err, data) {
-
-
-
         if (err) {
             console.log(err)
         } else if (!data) {
@@ -57,7 +52,7 @@ api.post('/signup', (req, res, next) => {
                         })
                     } else {
                         console.log(err)
-                        res.status(403).send({
+                        res.send({
                             message: "user already exist"
                         })
                     };

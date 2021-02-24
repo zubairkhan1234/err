@@ -10,6 +10,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
+    Redirect
 } from "react-router-dom";
 
 function Navigation() {
@@ -27,15 +28,14 @@ function Navigation() {
                     <Route exact path="/">
                         <Home />
                     </Route>
-                    {globalState.loginStatus === false ?
-                        <Route path="/login">
-                            <Login />
-                        </Route>
-                        :
-                        <Route exact path="/dashboard">
+                    {globalState.loginStatus === true ?
+                        <Route path="/dashboard">
                             <Dashboard />
                         </Route>
-                        
+                        :
+                        <Redirect path="/login">
+                            <Login />
+                        </Redirect>
                     }
                     {/* <Route  path="/dashboard">
                         <Dashboard />

@@ -26,10 +26,10 @@ function AppRoute() {
     return (
         <>
             <div style={themeStyles}>
+                <Link exact={true} to="/">Home</Link>
                 <Link to="/dashboard">Dashboard</Link>
                 <Link to="/login">Login</Link>
                 <Link to="/signup">SignUp</Link>
-                <Link to="/">Home</Link>
                 {/* <button style={navStyles} onClick={() => setGlobalState(prev => ({ ...prev, darkTheme: !prev.darkTheme }))} >toggle</button>
                 {"===>" + JSON.stringify(globalState)} */}
                 
